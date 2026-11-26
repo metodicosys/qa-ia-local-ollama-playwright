@@ -1,0 +1,10 @@
+# 1. Modelo base (debe ser uno que ya tengas o que Ollama pueda descargar)
+FROM qwen3.5:4b
+
+# 2. Parámetros opcionales (ej. creatividad: 0 es más estricto, 1 es más creativo)
+PARAMETER temperature 0.7
+
+# 3. Instrucciones de comportamiento (System Prompt)
+SYSTEM """
+Eres un asistente experto en programación. Responde siempre en español, de forma directa y con ejemplos de código claros.
+"""

@@ -1,0 +1,33 @@
+# 1. Qué pregunta(s) se enviarán a tu modelo
+prompts:
+  - "{{pregunta}}"
+
+# 2. Apuntamos directamente a tu modelo en Ollama
+providers:
+  - id: ollama:chat:meto1.0:4b
+
+# 3. Casos de prueba (Tests) y reglas de evaluación (Assertions)
+tests:
+  - vars:
+      pregunta: "Escribe una función en Python para sumar dos números."
+    assert:
+      # Verifica que la respuesta contenga la palabra 'def'
+      - type: contains
+        value: "def"
+      # Verifica que no esté vacía y tenga un largo mínimo
+      - type: javascript
+        value: "output.length > 30"
+
+  - vars:
+      pregunta: "Responde solo con la palabra: HOLA"
+    assert:
+      # Verifica que el modelo obedezca instrucciones estrictas
+      - type: icontains
+        value: "hola"
+
+  - vars:
+      pregunta: "¿Cuál es la capital de Perú?"
+    assert:
+      - type: icontains
+        value: "Lima"
+  
